@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: simplifica
+    environment:
+      POSTGRES_USER: ypezoa
+      POSTGRES_PASSWORD: hh9m3m34
+      POSTGRES_DB: bm_simplifica # crea la base de datos
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: . # Utiliza el Docker file
+    container_name: myapp
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ypezoa
+      DB_PASSWORD: hh9m3m34
+      DB_NAME: bm_simplifica #
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
