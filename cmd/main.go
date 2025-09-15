@@ -15,7 +15,10 @@ func main() {
 	db.DBConnection()
 
 	// migrate models
-	db.DB.AutoMigrate(&models.User{}, &models.File{}, &models.Company{})
+	err := db.DB.AutoMigrate(&models.User{}, &models.File{}, &models.Company{})
+	if err != nil {
+		log.Fatalf("Error migrando tablas: %v", err)
+	}
 
 	// router
 	r := mux.NewRouter()

@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:15
@@ -7,14 +5,15 @@ services:
     environment:
       POSTGRES_USER: ypezoa
       POSTGRES_PASSWORD: hh9m3m34
-      POSTGRES_DB: bm_simplifica # crea la base de datos
+      POSTGRES_DB: bm_simplifica
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   app:
-    build: . # Utiliza el Docker file
+    build: .
     container_name: myapp
     depends_on:
       - db
@@ -23,11 +22,12 @@ services:
       DB_PORT: 5432
       DB_USER: ypezoa
       DB_PASSWORD: hh9m3m34
-      DB_NAME: bm_simplifica #
+      DB_NAME: bm_simplifica
     ports:
       - "8080:8080"
     volumes:
       - .:/app
+      - /app/tmp # para que air use cache sin interferir con tu código
 
 volumes:
   db_data:

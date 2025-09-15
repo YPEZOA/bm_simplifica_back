@@ -1,22 +1,23 @@
-# Etapa de build
-FROM golang:1.23-alpine AS builder
+# Usamos Go completo para desarrollo
+FROM golang:1.25-alpine
+
+# Instalamos herramientas útiles
+RUN apk add --no-cache git bash
+
+# Instalar air para hot reload
+RUN go install github.com/air-verse/air@latest
 
 WORKDIR /app
 
-# Copiar go.mod y go.sum primero (para cachear dependencias)
+# Copiar mod y sum primero (para cachear dependencias)
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copiar el código y compilar
+# Copiar todo el código
 COPY . .
-RUN go build -o main ./cmd
 
-# Etapa final, más liviana
-FROM alpine:latest
-
-WORKDIR /app
-
-COPY --from=builder /app/main .
-
+# Exponer puerto
 EXPOSE 8080
-CMD ["./main"]
+
+# Comando para desarrollo con hot reload
+CMD ["air", "-c", ".air.toml"]

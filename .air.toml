@@ -1,0 +1,12 @@
+# ruta de los binarios y comandos
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o tmp/main ./cmd"
+bin = "tmp/main"
+include_ext = ["go"]
+exclude_dir = ["db_data", "tmp"]
+
+[log]
+time = true

@@ -93,6 +93,15 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	createdUser, err := NewUserStorage().CreateUser(user)
+	createdUserResponse := models.UserResponse{
+		ID:        createdUser.ID,
+		Name:      createdUser.Name,
+		Email:     createdUser.Email,
+		Phone:     createdUser.Phone,
+		Role:      createdUser.Role,
+		Companies: createdUser.Companies,
+	}
+
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(types.APIResponse{
@@ -105,6 +114,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(types.APIResponse{
 		Success: true,
-		Data:    createdUser,
+		Data:    createdUserResponse,
 	})
 }

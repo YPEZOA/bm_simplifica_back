@@ -15,13 +15,13 @@ const (
 type User struct {
 	gorm.Model
 
-	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
-	Name      string    `gorm:"not null"`
-	Email     string    `gorm:"unique"`
-	Password  string    `gorm:"not null"`
-	Role      Role      `gorm:"not null"`
-	Phone     string
-	Companies []Company `gorm:"foreignKey:UserID"`
+	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	Name      string    `gorm:"not null" json:"name"`
+	Email     string    `gorm:"unique" json:"email"`
+	Password  string    `gorm:"not null" json:"password"`
+	Role      Role      `gorm:"not null" json:"role"`
+	Phone     string    `json:"phone"`
+	Companies []Company `gorm:"foreignKey:UserID" json:"companies"`
 }
 
 type UserResponse struct {
