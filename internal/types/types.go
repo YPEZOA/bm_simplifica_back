@@ -31,3 +31,8 @@ type FileStorage interface {
 type AuthStorage interface {
 	SignIn(email string, password string) (models.User, error)
 }
+
+type CompanyStorage interface {
+	CreateCompany(company models.Company) (models.Company, error)
+	GetCompanies() ([]models.Company, error)
+}

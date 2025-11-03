@@ -8,9 +8,15 @@ import (
 type Company struct {
 	gorm.Model
 
-	ID     uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
-	Name   string    `gorm:"not null"`
-	Rut    string    `gorm:"unique, not null"`
-	Files  []File    `gorm:"foreignKey:CompanyID"`
-	UserID uuid.UUID
+	ID     uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4();primaryKey" json:"id"`
+	Name   string    `gorm:"not null" json:"name"`
+	Rut    string    `gorm:"unique, not null" json:"rut"`
+	Files  []File    `gorm:"foreignKey:CompanyID" json:"files"`
+	UserID uuid.UUID `json:"user_id"`
+}
+
+type CompaniesResponse struct {
+	Name  string `json:"name"`
+	Rut   string `json:"rut"`
+	Files []File `json:"files"`
 }

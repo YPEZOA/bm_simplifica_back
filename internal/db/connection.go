@@ -26,8 +26,8 @@ func DBConnection() {
 	)
 
 	var err error
-	// Retry simple: espera hasta que la DB esté lista
-	for range 10 {
+	// Retry: espera hasta que la DB esté lista
+	for range 5 {
 		DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 		if err == nil {
 			fmt.Println("Base de datos conectada")

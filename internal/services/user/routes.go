@@ -18,7 +18,10 @@ func UserRoutes(r *mux.Router) {
 
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
+	// Users list from DB
 	users, err := NewUserStorage().GetAllUsers()
+
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(types.APIResponse{
@@ -29,6 +32,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	// Prepare response data
 	var usersData []models.UserResponse
 	for _, user := range users {
 		usersData = append(usersData, models.UserResponse{

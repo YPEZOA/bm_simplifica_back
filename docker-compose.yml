@@ -27,7 +27,7 @@ services:
       - "8080:8080"
     volumes:
       - .:/app
-      - /app/tmp # para que air use cache sin interferir con tu código
+      - /app/tmp # para que air use cache sin interferir con el código
 
 volumes:
   db_data:
