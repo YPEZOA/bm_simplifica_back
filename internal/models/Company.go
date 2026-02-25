@@ -12,7 +12,8 @@ type Company struct {
 	Name   string    `gorm:"not null" json:"name"`
 	Rut    string    `gorm:"unique, not null" json:"rut"`
 	Files  []File    `gorm:"foreignKey:CompanyID" json:"files"`
-	UserID uuid.UUID `json:"user_id"`
+	UserID uuid.UUID `gorm:"type:uuid;not null"references:ID" json:"user_id"`
+	User   User      `gorm:"foreignKey:UserID" json:"user,omitempty"`
 }
 
 type CompaniesResponse struct {

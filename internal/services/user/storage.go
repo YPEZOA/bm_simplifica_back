@@ -35,3 +35,12 @@ func (s *storage) CreateUser(user models.User) (models.User, error) {
 	}
 	return user, nil
 }
+
+func (s *storage) DeleteUser(id uuid.UUID) error {
+	// Soft delete del usuario (marcar como eliminado, no eliminar físicamente)
+	return db.DB.Delete(&models.User{}, id).Error
+}
+
+func (s *storage) UpdateUserPassword(id uuid.UUID, hashedPassword string) error {
+	return db.DB.Model(&models.User{}).Where("id = ?", id).Update("password", hashedPassword).Error
+}

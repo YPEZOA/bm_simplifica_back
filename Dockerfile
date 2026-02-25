@@ -14,7 +14,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copiar todo el código
-COPY . .
+# COPY . .
 
 # Exponer puerto
 EXPOSE 8080

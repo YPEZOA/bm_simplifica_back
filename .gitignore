@@ -1,0 +1,70 @@
+# Archivos y directorios a ignorar
+
+# Binarios compilados
+/main
+/bm_simplifica_back
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Directorios de dependencias
+/vendor/
+
+# Archivos de Go
+*.test
+*.out
+coverage.txt
+
+# Archivos de Air (hot reload)
+.air.toml
+tmp/
+
+# Archivos de uploads
+uploads/
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.jpg
+*.jpeg
+*.png
+*.txt
+
+# Archivos de entorno
+.env
+.env.local
+.env.development
+.env.production
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de log
+*.log
+logs/
+
+# Archivos de base de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de Docker
+.dockerignore
+
+# Archivos de documentación generada
+docs/
+
+# Archivos de backup
+*.bak
+*.backup

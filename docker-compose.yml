@@ -12,6 +12,20 @@ services:
       - db_data:/var/lib/postgresql/data
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: simplifica_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@simplifica.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - db
+
   app:
     build: .
     container_name: myapp
@@ -23,6 +37,7 @@ services:
       DB_USER: ypezoa
       DB_PASSWORD: hh9m3m34
       DB_NAME: bm_simplifica
+      SERVER_PORT: 8080
     ports:
       - "8080:8080"
     volumes:
@@ -31,3 +46,4 @@ services:
 
 volumes:
   db_data:
+  pgadmin_data:

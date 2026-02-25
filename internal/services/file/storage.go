@@ -42,3 +42,19 @@ func (s *storage) DeleteFile(id uuid.UUID) (models.File, error) {
 	}
 	return file, nil
 }
+
+func (s *storage) DeleteMultipleFiles(ids []uuid.UUID) ([]models.File, error) {
+	var files []models.File
+
+	// Obtener todos los archivos antes de eliminar
+	if err := db.DB.Where("id IN ?", ids).Find(&files).Error; err != nil {
+		return nil, err
+	}
+
+	// Eliminar archivos de la base de datos
+	if err := db.DB.Where("id IN ?", ids).Delete(&models.File{}).Error; err != nil {
+		return nil, err
+	}
+
+	return files, nil
+}
