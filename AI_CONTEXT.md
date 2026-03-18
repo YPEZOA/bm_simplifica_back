@@ -226,8 +226,34 @@ SERVER_PORT=8080
 
 ### **👤 Credenciales Actuales**
 - **Admin**: admin@simplifica.com / Admin123!
+- **Cliente**: cliente@simplifica.com / Cliente123!
 - **pgAdmin**: admin@simplifica.com / admin123
 - **Database**: ypezoa / hh9m3m34
+
+---
+
+## 🔄 **Seed de Desarrollo** (⚠️ REMOVER EN PRODUCCIÓN)
+
+### **📦 Setup Automático**
+Al iniciar la app con `ENV=development`, se crean automáticamente:
+- **Admin**: admin@simplifica.com / Admin123!
+- **Cliente**: cliente@simplifica.com / Cliente123!
+
+El seed solo se ejecuta si:
+1. La variable `ENV=development` está configurada en `.env`
+2. Los usuarios no existen previamente en la base de datos
+
+### **⚠️ IMPORTANTE: Remover antes de Producción**
+Antes de pasar a producción DEBES:
+1. Eliminar las funciones `seedDevUsers` y `seedUser` de `cmd/main.go`
+2. Eliminar o comentar el llamado a `seedDevUsers()` en `main()`
+3. Eliminar el archivo `.env` del repositorio (ya está en .gitignore)
+4. Configurar `ENV=production` en las variables de entorno del servidor
+
+```bash
+# Verificar que ENV no sea development en producción
+echo $ENV  # Debe mostrar "production" o estar vacío
+```
 
 ---
 
